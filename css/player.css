@@ -1,0 +1,120 @@
+.player {
+  z-index: 2;
+  background-color: #505056;
+  height: 75px;
+  width: 100%;
+  top: 0;
+  left: 200px;
+  position: fixed;
+  font-size: 0px;
+}
+.player .cover {
+  background-color: #FFFFFF;
+  width: 75px;
+  height: 75px;
+}
+
+.player .block {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.player .musician {
+  margin-top: 15px;
+  margin-left: 10px;
+  width: 180px;
+  font-size: 14px;
+  color: #757588;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: Roboto, sans-serif;
+}
+
+.player .musician a:hover {
+  text-decoration: underline;
+}
+ .player .song {
+   margin-top: 5px;
+   margin-left: 10px;
+
+   width: 200px;
+   font-size: 16px;
+   color: #1f1f20;
+   overflow: hidden;
+   white-space: nowrap;
+   font-family: Roboto, sans-serif;
+ }
+
+.player .song a:hover {
+  text-decoration: underline;
+}
+
+.player .line {
+  font-size: 0;
+}
+
+
+.player .random {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 20px;
+  margin-left: 3px;
+}
+
+.player .prev {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 20px;
+  margin-left: 75px;
+}
+.player .play {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.player .next {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-top: 20px;
+  margin-left: 18px;
+}
+
+.player .currentTime, .player .finalTime {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #757588;
+}
+
+.player .strip {
+  display: inline-block;
+  margin-left: 20px;
+  background: #d1d1e7;
+  height: 3px;
+  width: 200px;
+  border-radius: 2px;
+}
+
+.player .strip .played {
+  height: 3px;
+  background:  #1f1f20;
+  border-radius: 2px;
+  width: 80%;
+}
+
+.finalTime {
+  margin-left: 20px;
+}
+
+.player img:hover {
+  filter: invert(10%);
+}

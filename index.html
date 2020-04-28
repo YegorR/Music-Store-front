@@ -2,10 +2,34 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/player.css">
     <title>Music Store</title>
   </head>
   <body>
-    <div class="player"></div>
+    <div class="player">
+      <div class="block">
+        <img class="cover"/>
+      </div>
+
+      <div class="block">
+        <div class="musician"><a>Eisbrecher</a></div>
+        <div class="song"><a>Die hölle muss warten</a> </div>
+      </div>
+      <div class="block">
+        <div class="line">
+          <img class="random" src="img/player/random.svg"/>
+          <img class="prev" src="img/player/prev.svg"/>
+          <img class="play" src="img/player/play.svg"/>
+          <img class="next" src="img/player/next.svg"/>
+        </div>
+        <div class="line">
+          <div class="currentTime">0:00</div>
+          <div class="strip"><div class="played"></div></div>
+          <div class="finalTime">10:23</div>
+        </div>
+      </div>
+    </div>
 
     <div class="sidePanel">
       <div class="search">Строка поиска</div>
