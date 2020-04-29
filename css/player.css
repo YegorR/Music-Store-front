@@ -9,7 +9,7 @@
   font-size: 0px;
 }
 .player .cover {
-  background-color: #FFFFFF;
+  background-color: #000000;
   width: 75px;
   height: 75px;
 }
@@ -99,22 +99,22 @@
   display: inline-block;
   margin-left: 20px;
   background: #d1d1e7;
-  height: 3px;
+  height: 5px;
   width: 200px;
   border-radius: 2px;
 }
 
 .player .strip .played {
-  height: 3px;
+  height: 5px;
   background:  #1f1f20;
   border-radius: 2px;
-  width: 80%;
+  width: 0%;
 }
 
 .finalTime {
   margin-left: 20px;
 }
 
-.player img:hover {
+.player .line img:hover {
   filter: invert(10%);
 }

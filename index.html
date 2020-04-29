@@ -4,6 +4,21 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/player.css">
+
+
+    <script src = "js/lib/howler.js"></script>
+    <script src = "js/lib/jquery-3.5.0.js"></script>
+
+    <script src = "js/common.js"></script>
+    <script src = "js/player.js"></script>
+
+    <script>
+      $(function() {
+        localStorage.setItem("token", yegor_token);
+        var player = new Player();
+        player.setTrackList([48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58]);
+      });
+    </script>
     <title>Music Store</title>
   </head>
   <body>
@@ -13,8 +28,8 @@
       </div>
 
       <div class="block">
-        <div class="musician"><a>Eisbrecher</a></div>
-        <div class="song"><a>Die hölle muss warten</a> </div>
+        <div class="musician"><a></a></div>
+        <div class="song"><a></a> </div>
       </div>
       <div class="block">
         <div class="line">
@@ -26,7 +41,7 @@
         <div class="line">
           <div class="currentTime">0:00</div>
           <div class="strip"><div class="played"></div></div>
-          <div class="finalTime">10:23</div>
+          <div class="finalTime">0:00</div>
         </div>
       </div>
     </div>
