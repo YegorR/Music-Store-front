@@ -1,12 +1,13 @@
 body {
   background: rgb(2,0,36);
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 100%);
+  font-family: Roboto, sans-serif;
 }
 
 
 .sidePanel {
   height: 100%;
-  width: 200px;
+  width: 20%;
   position: fixed;
   z-index: 3;
   top: 0;
@@ -27,4 +28,21 @@ body {
 
 .sidePanel a:hover {
   color: #87aca3;
+}
+
+
+.main {
+  position: relative;
+  left:20%;
+  top: 75px;
+  width: 80%;
+}
+
+.close {
+  display: none;
+}
+
+
+a:hover {
+  text-decoration: underline;
 }

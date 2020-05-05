@@ -1,0 +1,41 @@
+#album {
+  width: 100%;
+  font-size: 0px;
+}
+#album .block {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  padding: 20px;
+  height: 100%;
+  font-size: 12px;
+}
+
+#album .cover {
+  width: 256px;
+  height: 256px;
+  background-color: black;
+}
+
+#album .type {
+  font-size: 16px;
+}
+
+#album .name {
+  font-size: 48px;
+}
+
+#album .musician {
+  font-size: 26px;
+  font-style: italic;
+}
+#album .releaseDate {
+  font-size: 20px;
+}
+#album a:hover {
+  text-decoration: underline;
+}
+
+#album .name, .album .musician {
+  padding-bottom: 20px;
+}

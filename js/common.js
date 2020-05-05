@@ -32,3 +32,22 @@ function doRequest(requestParams) {
     }
   });
 }
+
+function getImage(url, errorFunction, element) {
+  $.ajax({
+    url: host + url,
+    headers: {
+      "Authorization": localStorage.getItem("token")
+    },
+    success: function(data, textStatus, jqXHR) {
+      element.attr("src", "data:image;base64, " + data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      if (typeof errorFunction == "function") {
+        requestParams.error(jqXHR, textStatus, errorThrown);
+      } else {
+        alert(textStatus, errorThrown);
+      }
+    }
+  });
+}

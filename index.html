@@ -4,19 +4,28 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/player.css">
-
+    <link rel="stylesheet" href="css/tracklist.css">
+    <link rel="stylesheet" href="css/album.css">
+    <link rel="stylesheet" href="css/search.css">
 
     <script src = "js/lib/howler.js"></script>
     <script src = "js/lib/jquery-3.5.0.js"></script>
+    <script src = "js/lib/jsrender.js"></script>
 
     <script src = "js/common.js"></script>
+    <script src = "js/router.js"></script>
+    <script src = "js/search.js"></script>
     <script src = "js/player.js"></script>
+    <script src = "js/trackList.js"></script>
+    <script src = "js/album.js"></script>
 
     <script>
       $(function() {
         localStorage.setItem("token", yegor_token);
         var player = new Player();
-        player.setTrackList([48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58]);
+        //var searchPage = new SearchPage("ei", 2);
+        //var album = new Album(13, player);
+        var router = new Router(player);
       });
     </script>
     <title>Music Store</title>
@@ -24,7 +33,7 @@
   <body>
     <div class="player">
       <div class="block">
-        <img class="cover"/>
+        <img class="cover" />
       </div>
 
       <div class="block">
@@ -47,7 +56,16 @@
     </div>
 
     <div class="sidePanel">
-      <div class="search">Строка поиска</div>
+      <div id="searchString">
+        <input type="text" maxlength="256" size="25"></input>
+        <div>
+          <select>
+            <option value="musicians">Исполнители</option>
+            <option value="albums">Альбомы</option>
+            <option value="tracks">Треки</option>
+          </select>
+        </div>
+      </div>
       <a class="favourite">Избранное</a>
       <a class="myPlaylists">Мои плейлисты</a>
       <a class="subscribe">Подписки</a>
@@ -56,6 +74,58 @@
       <a class="admin">Панель администратора</a>
       <a class="exit">Выйти</a>
     </div>
-    <div class="main"></div>
+    <div class="main">
+      <div class="close" id="album">
+        <div class="block">
+          <img class="cover"/>
+        </div>
+        <div class="block"/>
+          <div class="type"></div>
+          <div class="name"></div>
+          <div class="musician"><a></a></div>
+          <div class="releaseDate"></div>
+        </div>
+      </div>
+      <div class="close" id="search">
+        <script id="albumSearchPage-template" type="text/x-jsrender">
+          <div class="queryHeader">По запросу: <span class="query">{{> query}}</span></div>
+          <div class="queryHeader">найдено результатов: {{: count}}</div>
+          {{for albums}}
+            <div class="item">
+              <div class="block">
+                <img class="cover" id="searchAlbumCover{{: index}}"/>
+              </div>
+              <div class="block">
+                <div class="type">
+                  {{if single}} Сингл
+                  {{else}} Альбом
+                  {{/if}}
+                </div>
+                <div class="albumName"><a href="#album/{{: id}}">{{> album}}</a></div>
+                <div class="musician"><a href="#musician/{{: musicianId}}">{{> musician}}</a></div>
+              </div>
+            </div>
+          {{/for}}
+        </script>
+        <div class="albumSearchPage"></div>
+      </div>
+      <div class="close" id="trackList">
+        <script id="trackList-template" type="text/x-jsrender">
+          <table>
+            {{for tracks}}
+              <tr>
+                <td class="play"><img id="trackListPlay{{: id}}" src="img/player/play.svg"></img></td>
+                <td class="like"><img id="trackListLike{{: id}}" src="img/like.svg"></img></td>
+                <td class="track">{{: track}}</td>
+                <td class="musician"><a>{{: musician}}</a></td>
+                <td class="albumname"><a>{{: album}}</a></td>
+                <td class="plays">{{> plays}}</td>
+              </tr>
+            {{/for}}
+          </table>
+        </script>
+        <div class="trackListPage"></div>
+      </div>
+    </div>
   </body>
 </html>

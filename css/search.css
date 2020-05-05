@@ -1,0 +1,61 @@
+#searchString input {
+  margin: 10px;
+}
+
+#searchString a:hover {
+  text-decoration: underline;
+}
+
+#searchString select {
+  margin: 10px;
+  margin-top: 0px;
+}
+
+#search .queryHeader {
+  font-size: 32px;
+  margin-left: 30px;
+}
+
+#search .queryHeader .query {
+  font-style: italic;
+}
+
+#search .item {
+  font-size: 0px;
+}
+
+#search .item .block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#search img {
+  background-color: #000000;
+  width: 75px;
+  height: 75px;
+  margin: 15px;
+}
+
+#search .item {
+  margin-top: 20px;
+}
+
+#search .albumSearchPage .item .block > div {
+
+}
+
+#search .albumSearchPage .item .block .type {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #1f1f20;
+}
+
+#search .albumSearchPage .item .block .albumName a {
+  font-size: 26px;
+  color: #757588;
+}
+
+#search .albumSearchPage .item .block .musician a {
+  font-size: 20px;
+  color: #757588;
+}

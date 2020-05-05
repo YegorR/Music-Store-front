@@ -2,9 +2,9 @@
   z-index: 2;
   background-color: #505056;
   height: 75px;
-  width: 100%;
+  width: 80%;
   top: 0;
-  left: 200px;
+  left: 20%;
   position: fixed;
   font-size: 0px;
 }
@@ -20,6 +20,14 @@
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+.player .descriptionblock {
+  width: 33%;
+}
+
+.player .playerblock {
+  width: 34%;
 }
 
 .player .musician {

@@ -1,0 +1,60 @@
+#trackList .like img, #trackList .play img{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width:16px;
+  height:16px;
+}
+
+#trackList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#trackList tr {
+  background-color: #505056;
+  border-bottom: 2px solid black;
+}
+
+#trackList tr:last-child {
+  border-bottom: 0;
+}
+
+#trackList td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}
+
+
+#trackList .play {
+  width: 5%;
+}
+
+#trackList .like {
+  width: 5%;
+}
+
+#trackList .track {
+  width: 30%;
+  color: #1f1f20;
+}
+
+#trackList .musician {
+  width: 25%;
+  color: #757588;
+}
+
+#trackList .albumname {
+  width: 25%;
+  color: #757588;
+  font-style: italic;
+}
+
+#trackList .plays {
+  width: 10%;
+}
+
+#trackList a:hover {
+  text-decoration: underline;
+}
