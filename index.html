@@ -24,8 +24,8 @@
         localStorage.setItem("token", yegor_token);
         var player = new Player();
         //var searchPage = new SearchPage("ei", 2);
-        //var album = new Album(13, player);
-        var router = new Router(player);
+        var album = new Album(13, player);
+        var router = new Router(player, album);
       });
     </script>
     <title>Music Store</title>

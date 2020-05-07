@@ -3,7 +3,7 @@ class NullPage {
 
   close() {}
 
-  getHref() {
+  getId() {
     return "nullpage";
   }
 }
@@ -18,7 +18,7 @@ class Router {
       this._page = new NullPage();
     }
 
-    this._searchString = new SearchString(this._handleSearch.bind(this));
+    //this._searchString = new SearchString(this._handleSearch.bind(this));
     let handleFunction = this._handle.bind(this);
     $(document).on("click", "a", handleFunction);
   }
@@ -35,18 +35,31 @@ class Router {
 
     e.preventDefault();
     href = href.split("#")[1].trim().toLowerCase();
-    if (this._page.getId() == href) return;
+    //if (this._page.getId() == href) return;
 
     if (href.startsWith("album/")) {
       var id = parseInt(href.split("album/")[1]);
       if (id == NaN) return;
       this._gotoAlbum(id); return;
     }
+
+    if(href.startsWith("medialibrary/")) {
+      this._gotoMedialibrary(href);
+      return;
+    }
   }
 
   _gotoAlbum(id) {
     this._page.close();
     this._page = new Album(id, this._player);
+  }
+
+  _gotoMedialibrary(href) {
+    if (this._page.getId() != "medialibrary") {
+      this._page.close();
+      this._page = new MediaLibrary();
+    }
+    this._page.setPage(href.split("medialibrary/")[1]);
   }
 
   setPage(page) {

@@ -1,0 +1,137 @@
+#musicianCommonList {
+  height: 100%;
+  display: flex;
+}
+
+#musicianCommonList .abcList {
+  width: 20%;
+  background-color: #37468e;
+  padding-top: 20px;
+  padding-left: 20px;
+  font-size: 20px;
+  height: 100%;
+}
+
+#musicianCommonList .abcList a {
+  font-size: 22px;
+}
+
+#musicianCommonList .abcList table {
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+#musicianCommonList .abcList tr {
+  background-color: #505056;
+  border-bottom: 2px solid black;
+}
+
+#musicianCommonList .abcList tr:last-child {
+  border-bottom: 0;
+}
+
+#musicianCommonList .abcList td {
+    padding: 5px;
+    width: 25px;
+}
+
+
+#musicianCommonList .musicianList .createMusicianButton {
+  background-color: #3c7e32;
+  border-color: #3c7e32;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .cancel {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .list a {
+  font-size: 32px;
+  color: #c7c7c7;
+}
+
+#musicianCommonList .musicianList .list div {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .createMusician div {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .readMusician > div {
+  margin-left: 30px;
+  margin-top: 30px;
+  color: #c7c7c7;
+}
+
+#musicianCommonList .musicianList .readMusician img {
+  /* max-width: 512px; */
+  max-height: 256px;
+  background-color: black;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .readMusician button {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#musicianCommonList .musicianList .readMusician .name {
+  font-size: 26px;
+}
+
+#musicianCommonList .musicianList .readMusician .item {
+  font-size: 22px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+#musicianCommonList .musicianList .readMusician .header {
+  font-size: 24px;
+  color:#505056;
+}
+
+#musicianCommonList .musicianList .readMusician .editMusicianButton {
+  background-color: #e2ee44;
+  border-color: #e2ee44;
+}
+
+#musicianCommonList .musicianList .readMusician .deleteMusicianButton {
+  background-color: #de5553;
+  border-color: #de5553;
+}
+
+#musicianCommonList .musicianList .readMusician .createAlbumButton {
+  background-color: #3c7e32;
+  border-color: #3c7e32;
+}
+
+#musicianCommonList .editMusician > div {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#musicianCommonList .editMusician .editMusicianButton {
+  background-color: #e2ee44;
+  border-color: #e2ee44;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#musicianCommonList .editMusician img {
+  max-height: 256px;
+}
+
+#musicianCommonList .loader {
+  color:#505056;
+}
+
+#musicianCommonList .loader input {
+  margin-top: 5px;
+}

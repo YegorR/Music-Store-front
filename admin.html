@@ -2,9 +2,90 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Music Store - Admin Mode</title>
+    <link rel="stylesheet" href="css/admin/header.css">
+    <link rel="stylesheet" href="css/admin/admin.css">
+    <link rel="stylesheet" href="css/admin/musicianList.css">
+
+    <script src="js/lib/jquery-3.5.0.js" charset="utf-8"></script>
+    <script src="js/lib/jsrender.js" charset="utf-8"></script>
+    <script src="js/lib/jquery.dm-uploader.js" charset="utf-8"></script>
+    <script src="js/common.js" charset="utf-8"></script>
+    <script src="js/router.js" charset="utf-8"></script>
+    <script src="js/medialibrary.js" charset="utf-8"></script>
   </head>
   <body>
+    <script type="text/javascript">
+      localStorage.setItem("token", admin_token);
+      var router = new Router();
+    </script>
+    <header>
+        <div id="searchString"></div>
+        <a href="#medialibrary/">Медиатека</a>
+        <a>Жанры</a>
+        <a>Пользователи</a>
+        <a>Отчёты</a>
+        <a>Режим пользователя</a>
+        <a>Выйти</a>
+    </header>
 
+    <div id="main">
+      <div id="musicianCommonList" class='close'>
+        <script id="musicianAbcList-template" type="text/x-jsrender">
+          {{props musicians}}
+            <tr><td><a href="#medialibrary/abcMusician_{{:key}}">{{:key}}</a></td><td>{{:prop}}</td></tr>
+          {{/props}}
+        </script>
+        <script id="musicianList-template" type="text/x-jsrender">
+          {{for musicians}}
+            <div><a href="#medialibrary/musician_{{: id}}">{{: name}}</a></div>
+          {{/for}}
+        </script>
+        <div class="abcList">
+          Исполнители:
+          <table>
+          </table>
+        </div>
+        <div class="musicianList">
+          <button class="createMusicianButton close">Создать исполнителя</button>
+          <div class="list"></div>
+          <div class="createMusician close">
+            <div><input maxlength="1024" class="name" placeholder="Имя исполнителя"></input></div>
+            <div><textarea rows="10" cols="30" maxlength="1024" class="description" placeholder="Описание"></textarea></div>
+            <button class="createMusicianButton">Создать исполнителя</button>
+            <button class="cancel">Отмена</button>
+          </div>
+          <div class="readMusician close">
+            <script id="albumsList-template" type="text/x-jsrender">
+              <div class="header">{{if single}}Синглы: {{else}}Альбомы: {{/if}}{{: count}}</div>
+              {{for items}}
+                <div class="item"><a href="#medialibrary/album_{{: id}}"></a>{{: name}}</div>
+              {{/for}}
+            </script>
+
+            <img class="image"/>
+            <div class="name"></div>
+            <div class="description"></div>
+            <button class="editMusicianButton">Редактировать исполнителя</button>
+            <button class="deleteMusicianButton">Удалить исполнителя</button>
+            <button class="createAlbumButton">Создать альбом/сингл</button>
+            <button class="cancel">Отмена</button>
+            <div class="albumsList"></div>
+            <div class="singlesList"></div>
+          </div>
+          <div class="editMusician close">
+            <div><img/></div>
+            <div class="loader">
+              <div class="title">Загрузить изображение</div>
+              <input type="file" title="Загрузить изображение">
+            </div>
+            <div><input maxlength="1024" class="name" placeholder="Имя исполнителя"></input></div>
+            <div><textarea rows="10" cols="30" maxlength="1024" class="description" placeholder="Описание"></textarea></div>
+            <button class="editMusicianButton">Изменить исполнителя</button>
+            <button class="cancel">Отмена</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

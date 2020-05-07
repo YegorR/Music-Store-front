@@ -11,10 +11,23 @@ function doRequest(requestParams) {
   } else {
       var dataType = "json"
   }
+  if (typeof requestParams.type == "string") {
+    var type = requestParams.type;
+  } else {
+    var type = "GET";
+  }
+  if (requestParams.data) {
+    var data = requestParams.data;
+  } else {
+    var data = undefined;
+  }
   $.ajax({
     url: host + requestParams.url,
     dataType: dataType,
     contentType: "application/json",
+    type: type,
+    data: JSON.stringify(data),
+    contentType: 'application/json',
     headers: {
       "Authorization": localStorage.getItem("token")
     },
@@ -50,4 +63,26 @@ function getImage(url, errorFunction, element) {
       }
     }
   });
+}
+
+function setImageLoader(url, element, successElement, errorFunction) {
+  element.dmUploader({
+    url: host + url,
+    queue: false,
+    method: "PUT",
+    headers: {
+      'Authorization': localStorage.getItem("token")
+    },
+    fieldName: "image",
+    onUploadSuccess: function() {
+      if (successElement) {
+        getImage(url, null, successElement);
+      }
+    },
+    allowedTypes: "image/*"
+  });
+}
+
+function removeImageLoader(element) {
+  element.dmUploader("destroy");
 }
