@@ -3,29 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Music Store - Admin Mode</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/icon.png">
+    <link rel="stylesheet" href="css/lib/jquery.simple-dtpicker.css">
+
     <link rel="stylesheet" href="css/admin/header.css">
     <link rel="stylesheet" href="css/admin/admin.css">
     <link rel="stylesheet" href="css/admin/musicianList.css">
+    <link rel="stylesheet" href="css/admin/genre.css">
 
     <script src="js/lib/jquery-3.5.0.js" charset="utf-8"></script>
     <script src="js/lib/jsrender.js" charset="utf-8"></script>
     <script src="js/lib/jquery.dm-uploader.js" charset="utf-8"></script>
+
     <script src="js/common.js" charset="utf-8"></script>
     <script src="js/router.js" charset="utf-8"></script>
-    <script src="js/medialibrary.js" charset="utf-8"></script>
+    <script src="js/admin/medialibrary.js" charset="utf-8"></script>
+    <script src="js/admin/musician.js" charset="utf-8"></script>
+    <script src="js/admin/album.js" charset="utf-8"></script>
+    <script src="js/admin/genres.js" charset="utf-8"></script>
+
   </head>
   <body>
     <script type="text/javascript">
       localStorage.setItem("token", admin_token);
-      var router = new Router();
+
+      var router = Router.getInstance();
     </script>
     <header>
         <div id="searchString"></div>
         <a href="#medialibrary/">Медиатека</a>
-        <a>Жанры</a>
+        <a href="#genres">Жанры</a>
         <a>Пользователи</a>
         <a>Отчёты</a>
-        <a>Режим пользователя</a>
+        <a href="index.html">Режим пользователя</a>
         <a>Выйти</a>
     </header>
 
@@ -33,7 +43,7 @@
       <div id="musicianCommonList" class='close'>
         <script id="musicianAbcList-template" type="text/x-jsrender">
           {{props musicians}}
-            <tr><td><a href="#medialibrary/abcMusician_{{:key}}">{{:key}}</a></td><td>{{:prop}}</td></tr>
+            <tr><td><a href="#medialibrary/abcmusician_{{:key}}">{{:key}}</a></td><td>{{:prop}}</td></tr>
           {{/props}}
         </script>
         <script id="musicianList-template" type="text/x-jsrender">
@@ -59,7 +69,7 @@
             <script id="albumsList-template" type="text/x-jsrender">
               <div class="header">{{if single}}Синглы: {{else}}Альбомы: {{/if}}{{: count}}</div>
               {{for items}}
-                <div class="item"><a href="#medialibrary/album_{{: id}}"></a>{{: name}}</div>
+                <div class="item"><a href="#medialibrary/album_{{: id}}_{{: musicianId}}">{{: name}}</a></div>
               {{/for}}
             </script>
 
@@ -84,8 +94,136 @@
             <button class="editMusicianButton">Изменить исполнителя</button>
             <button class="cancel">Отмена</button>
           </div>
+          <div class="createAlbum close">
+            <script id="createAlbum-template" type="text/x-jsrender">
+              <div class="item">
+                <input type="text" maxlength="256" class="track" placeholder="Название трека"></input>
+                <button class="plusButton">+</button>
+                <button class="minusButton">-</button>
+              </div>
+            </script>
+            <div><input type="text" maxlength="256" class="name" placeholder="Название альбома"></input></div>
+            <div><input class="date" type="date"></div>
+            <div><select class="isSingle">
+              <option value="false">Альбом</option>
+              <option value="true">Сингл</option>
+              </select>
+            </div>
+            <div class="header">Треки</div>
+            <div class="trackList"></div>
+            <button class="createAlbumButton">Создать альбом</button>
+            <button class="cancel">Отмена</button>
+          </div>
+          <script id="readAlbum-template" type="text/x-jsrender">
+            <img/>
+            <div class="musicianName"><a href="#medialibrary/musician_{{: musicianId}}">{{: musicianName}}</a></div>
+            <div class="name">{{: name}}</div>
+            <div class="single">{{if single}}Сингл{{else}}Альбом{{/if}}</div>
+            <div class="date">{{: releaseDate}}</div>
+            <div class="header">Треки</div>
+            <table class="trackList">
+              {{for tracks}}
+                <tr><td>{{: name}}</td><td>-</td><td>{{: playsNumber}}</td></tr>
+              {{/for}}
+            </table>
+            <button class="editAlbumButton">Редактировать альбом</button>
+            <button class="loadTracksButton">Загрузить аудиозаписи</button>
+            <button class="deleteAlbumButton">Удалить альбом</button>
+            <button class="cancel">Вернуться к исполнителю</button>
+          </script>
+          <div class="readAlbum close"></div>
+          <script id="editAlbum-template" type="text/x-jsrender">
+            <div><img class="cover"/></div>
+            <div class="loader">
+              <div class="title">Загрузить изображение</div>
+              <input type="file" title="Загрузить изображение">
+            </div>
+            <div><input maxlength="256" class="name" placeholder="Название альбома" value="{{: name}}"></input></div>
+            <div><input class="date" type="date" value="{{: date}}"></div>
+            <div><select class="isSingle">
+              <option value="false" {{if single}}{{else}}selected{{/if}}>Альбом</option>
+              <option value="true" {{if single}}selected{{/if}}>Сингл</option>
+              </select>
+            </div>
+            <table class="tracklist">
+            </table>
+            <button class="editAlbumButton">Изменить альбом</button>
+            <button class="cancel">Отмена</button>
+          </script>
+          <script id="editAlbum-item-template" type="text/x-jsrender">
+            {{for tracks}}
+            <tr>
+              <td class="track"><input type="text" maxlength="256" value="{{: name}}" placeholder="Название трека"></td>
+              <td><button class="plusButton">+</button></td>
+              <td><button class="minusButton">-</button></td>
+              <td><div class="lifter"><img class="up" src="img/up.svg"/><img class="down" src="img/down.svg"/></div></td>
+              <td><button class="yellowButton chooseGenresButton">Жанры</button></td>
+            </tr>
+            {{/for}}
+          </script>
+          <div class="editAlbum">
+          </div>
+          <script id="chooseGenre-template" type="text/x-jsrender">
+            <div class="block">
+              <table>
+                {{for genres}}
+                  <tr>
+                    <td class="genre">{{: name}}</td>
+                    <td class="checkbox"><input type="checkbox" {{if belonged}}checked{{/if}}></td>
+                  </tr>
+                {{/for}}
+              </table>
+            </div>
+            <button class="cancel">Вернуться к альбому</button>
+          </script>
+          <div class="chooseGenre"></div>
+          <script id="loadTracks-template" type="text/x-jsrender">
+            <table>
+              {{for tracks}}
+              <tr>
+                <td class="name">{{: name}}</td>
+                <td><input type="file"></td>
+                <td><img class="close" src="img/tick.svg"/></td>
+              </tr>
+              {{/for}}
+            </table>
+            <button class="cancel">Вернуться к альбому</button>
+          </script>
+          <div class="loadTracks">
+          </div>
         </div>
       </div>
+      <script id="genres-template" type='text/x-jsrender'>
+        <button class="createGenreButton" href="#createGenre">Создать жанр</button>
+        {{for genres}}
+          <div class="genre"><a href="#genre/{{:id}}">{{:name}}</a></div>
+        {{/for}}
+      </script>
+      <div id="genres" class='close'></div>
+      <div id="createGenre" class='close'>
+        <div><input type="text" class="name" placeholder="Название"/></div>
+        <div><textarea type="text" rows="10" cols="30" maxlength="1024" class="description" placeholder="Описание"></textarea></div>
+        <button class="createGenreButton">Создать жанр</button>
+        <button class="cancel" href="#genres">Отмена</button>
+      </div>
+      <script id="genre-template" type='text/x-jsrender'>
+        <div class="image"><img src="" /></div>
+        <div class="name">{{:name}}</div>
+        <div class="description">{{:description}}</div>
+        <button class="editGenreButton">Редактировать жанр</button>
+        <button class="deleteGenreButton">Удалить жанр</button>
+        <button class="cancel" href="#genres">Отмена</button>
+      </script>
+      <div id="genre" class="close"></div>
+      <script id="editGenre-template" type='text/x-jsrender'>
+        <div><img/></div>
+        <div><input class="loader" type="file" title="Загрузить изображение"></div>
+        <div><input type="text" class="name" placeholder="Название" value="{{:name}}"/></div>
+        <div><textarea type="text" rows="10" cols="30" maxlength="1024" class="description" placeholder="Описание">{{:description}}</textarea></div>
+        <button class="editGenreButton">Редактировать жанр</button>
+        <button class="cancel" href="#genre/{{:id}}">Отмена</button>
+      </script>
+      <div id="editGenre" class="close"></div>
     </div>
   </body>
 </html>

@@ -52,9 +52,48 @@
 }
 
 #trackList .plays {
-  width: 10%;
+  width: 5%;
 }
 
 #trackList a:hover {
+  text-decoration: underline;
+}
+
+#trackList .menu {
+  width: 5%;
+  position: relative;
+}
+
+#trackList .menu img {
+  width: 16px;
+  height: 16px;
+}
+
+#trackList .menu img:hover {
+  filter: invert(10%);
+}
+
+#trackList .menu .submenu {
+  position: absolute;
+  top: 90%;
+  left: -25px;
+  width: auto;
+  z-index: 10000;
+  background-color: black;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#trackList .menu .submenu li {
+  padding: 5px;
+}
+
+#trackList .menu .submenu a {
+  color: #757588;
+  text-decoration: none;
+}
+
+#trackList .menu .submenu a:hover {
   text-decoration: underline;
 }

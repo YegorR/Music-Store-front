@@ -66,10 +66,12 @@ function getImage(url, errorFunction, element) {
 }
 
 function setImageLoader(url, element, successElement, errorFunction) {
+  element.attr("accept", "image/*");
   element.dmUploader({
     url: host + url,
     queue: false,
     method: "PUT",
+    auto: true,
     headers: {
       'Authorization': localStorage.getItem("token")
     },
@@ -79,10 +81,33 @@ function setImageLoader(url, element, successElement, errorFunction) {
         getImage(url, null, successElement);
       }
     },
-    allowedTypes: "image/*"
+    allowedTypes: "image/*",
+    extFilter: ["jpeg", "jpg", "gif", "png", "apng", "bmp"]
   });
 }
 
 function removeImageLoader(element) {
+  element.dmUploader("destroy");
+}
+
+function setAudioLoader(url, element, confirmHandler, startHandler, errorFunction) {
+  element.attr("accept", ".mp3");
+  element.dmUploader({
+    url: host + url,
+    queue: false,
+    auto: true,
+    method: "PUT",
+    fieldName: "audio",
+    onUploadSuccess: confirmHandler,
+    onNewFile: startHandler,
+    // allowedTypes: "audio/mp3",
+    // extFilter: ["mp3"],
+    headers: {
+      "Authorization": localStorage.getItem("token")
+    }
+  });
+}
+
+function removeAudioLoader(element) {
   element.dmUploader("destroy");
 }

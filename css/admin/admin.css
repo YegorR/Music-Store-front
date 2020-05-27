@@ -37,3 +37,34 @@ button {
 button:hover {
   filter: brightness(1.5);
 }
+
+.greenButton {
+  background-color: #3c7e32;
+  border-color: #3c7e32;
+}
+
+.yellowButton {
+  background-color: #e2ee44;
+  border-color: #e2ee44;
+}
+
+.redButton {
+  background-color: #de5553;
+  border-color: #de5553;
+}
+
+.block {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.commonImage {
+  max-height: 256px;
+  background-color: black;
+}
+
+.coverImage {
+  height: 256px;
+  width: 256px;
+  background-color: black;
+}

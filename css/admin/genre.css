@@ -1,0 +1,83 @@
+#genres .createGenreButton {
+  background-color: #3c7e32;
+  border-color: #3c7e32;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#genres .genre {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+#genres .genre a {
+  font-size: 32px;
+  color: #c7c7c7;
+}
+
+#createGenre > div {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#createGenre button {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+#createGenre .createGenreButton {
+  background-color: #3c7e32;
+  border-color: #3c7e32;
+}
+
+#genre div {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#genre .name {
+  font-size: 26px;
+  color: #c7c7c7;
+}
+
+#genre .description {
+  font-size: 22px;
+  color: #c7c7c7;
+}
+
+#genre .editGenreButton {
+  background-color: #e2ee44;
+  border-color: #e2ee44;
+}
+
+#genre .deleteGenreButton {
+  background-color: #de5553;
+  border-color: #de5553;
+}
+
+#genre img {
+  max-height: 256px;
+}
+
+#genre button {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#editGenre div {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#editGenre img {
+  max-height: 256px;
+}
+
+#editGenre button {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#editGenre .editGenreButton {
+  background-color: #e2ee44;
+  border-color: #e2ee44;
+}

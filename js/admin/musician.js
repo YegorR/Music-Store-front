@@ -1,101 +1,3 @@
-class MediaLibraryNullPage {
-  constructor() {
-    $("#musicianCommonList .musicianList > .createMusicianButton").removeClass("close");
-  }
-
-  close() {
-    $("#musicianCommonList .musicianList > .createMusicianButton").addClass("close");
-  }
-}
-
-class MediaLibrary {
-  constructor() {
-    $("#musicianCommonList").removeClass("close");
-    this._page = new MediaLibraryNullPage();
-
-    $("#musicianCommonList .musicianList > .createMusicianButton").click(this._clickCreateMusicianButton.bind(this));
-
-    this._sendAbcCountRequest();
-  }
-
-  _sendAbcCountRequest() {
-    var successFunction = this._getMusiciansCountByAbc.bind(this);
-    doRequest({
-      url: "/musicians?abc=true",
-      success: successFunction
-    });
-  }
-
-  close() {
-    $("#musicianCommonList .abcList table").html("");
-    $("#musicianCommonList").addClass("close");
-    $("#musicianCommonList .musicianList > .createMusicianButton").off("click");
-  }
-
-  getId() {
-    return "medialibrary";
-  }
-
-  setPage(href) {
-    if (href == "") {
-      this._page.close();
-      this._page = new MediaLibraryNullPage();
-    }
-    if (href.startsWith("abcmusician_")) {
-      var letter = href.split("abcmusician_")[1];
-      if (letter === "") {
-        return;
-      }
-      this._page.close();
-      this._page = new MediaLibraryMusiciansListPage(letter);
-      return;
-    }
-    if (href.startsWith("musician_")) {
-      var id = parseInt(href.split("musician_")[1]);
-      if (id === NaN) return;
-      this._page.close();
-      this._page = new MediaLibraryReadMusician(id, this._cancel.bind(this), this._clickEditMusicianHandler.bind(this), this._cancel.bind(this), null);
-    }
-  }
-
-
-  _getMusiciansCountByAbc(musicians_) {
-    var html = $.templates("#musicianAbcList-template").render({musicians: musicians_});
-    $("#musicianCommonList .abcList table").html(html);
-  }
-
-  _clickCreateMusicianButton () {
-    this._page.close();
-    this._page = new MediaLibraryCreateMusiciansListPage(this._musicianIsCreated.bind(this), this._cancel.bind(this));
-  }
-
-  _clickEditMusicianHandler(musicianInfo) {
-    this._page.close();
-    this._page = new MediaLibraryEditMusician(musicianInfo.id, musicianInfo.name, musicianInfo.description,
-      this._clickGotoMusician.bind(this) ,this._musicianIsCreated.bind(this));
-  }
-
-  _clickGotoMusician(musicianId) {
-    this._page.close();
-    this._page = new MediaLibraryReadMusician(musicianId, this._cancel.bind(this), this._clickEditMusicianHandler.bind(this),
-      this._cancel.bind(this), null, null);
-  }
-
-  _musicianIsCreated(musician) {
-    this._page.close();
-    this._page = new MediaLibraryReadMusician(musician.id, this._cancel.bind(this), this._clickEditMusicianHandler.bind(this),
-      this._cancel.bind(this), null, musician);
-    this._sendAbcCountRequest();
-  }
-
-  _cancel() {
-    this._page.close();
-    this._page = new MediaLibraryNullPage();
-    this._sendAbcCountRequest();
-  }
-}
-
-
 class MediaLibraryMusiciansListPage {
   constructor (letter) {
     this._letter = letter;
@@ -166,6 +68,7 @@ class MediaLibraryReadMusician {
     this._id = id;
     this._deleteHandler = deleteHandler;
     this._editHandler = editHandler;
+    this._createAlbumHandler = createAlbumHandler;
 
     this._musicianInfo = null;
     $("#musicianCommonList .musicianList .readMusician").removeClass("close");
@@ -185,6 +88,11 @@ class MediaLibraryReadMusician {
     $("#musicianCommonList .musicianList .readMusician .deleteMusicianButton").click(this._deleteMusician.bind(this));
     $("#musicianCommonList .musicianList .readMusician .cancel").click(cancelHandler);
     $("#musicianCommonList .musicianList .readMusician .editMusicianButton").click(this._clickEditMusician.bind(this));
+    $("#musicianCommonList .musicianList .readMusician .createAlbumButton").click(this._clickCreateAlbum.bind(this));
+  }
+
+  _clickCreateAlbum() {
+    this._createAlbumHandler(this._id);
   }
 
   _clickEditMusician() {
@@ -206,15 +114,28 @@ class MediaLibraryReadMusician {
     this._musicianInfo = info;
     $("#musicianCommonList .musicianList .readMusician .name").html(info.name);
     $("#musicianCommonList .musicianList .readMusician .description").html(info.description);
+
+    var musicianId = this._id;
+    info.albums.forEach((item, i) => {
+      item.musicianId = musicianId
+    });
+
+    info.singles.forEach((item, i) => {
+      item.musicianId = musicianId
+    });
+
+
     $("#musicianCommonList .musicianList .readMusician .albumsList").html($.templates("#albumsList-template").render({
       single: false,
       count: info.albums.length,
       items: info.albums
+      // musicianId: musicianId
     }));
     $("#musicianCommonList .musicianList .readMusician .singlesList").html($.templates("#albumsList-template").render({
       single: true,
       count: info.singles.length,
       items: info.singles
+      // musicianId: musicianId
     }));
   }
 

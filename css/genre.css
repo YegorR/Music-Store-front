@@ -1,0 +1,36 @@
+#genresList .trackName {
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 30px;
+  color: #757588;
+}
+
+#genresList .genre {
+  margin-left: 50px;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+#genresList .genre a {
+  color: #505056;
+}
+
+#genre > div {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#genre .name {
+  font-size:48px;
+  color: #757588;
+}
+
+#genre .description {
+  font-size: 20px;
+  color: #505056;
+}
+
+#genre img {
+  max-height: 256px;
+  background-color: black;
+}

@@ -1,0 +1,44 @@
+#musician > .name {
+  font-size:48px;
+  color: #757588;
+}
+
+#musician > div {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+#musician .image {
+  max-height: 256px;
+  background-color: black;
+}
+
+#musician .description {
+  font-size: 20px;
+  color: #505056;
+}
+
+#musician .item {
+  padding: 5px;
+}
+
+#musician .header {
+  font-size: 36px;
+}
+
+#musician .item .cover {
+  height: 128px;
+  width: 128px;
+  background-color: black;
+}
+
+#musician .item .name a {
+  /* margin-top: 5px; */
+  font-size: 22px;
+  color: #505056;
+  text-decoration:none;
+}
+
+#musician .item .name a:hover {
+  text-decoration: underline;
+}

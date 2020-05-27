@@ -1,9 +1,16 @@
+$(document).ready(function() {
+  $(document).click(function() {
+    $("#trackList .menu .submenu").addClass("close");
+  });
+});
+
 class TrackList {
   constructor(player) {
     this._tmpl = $.templates("#trackList-template");
     this._trackList = $(".main #trackList");
     this._player = player;
     this._tracks = [];
+    this._favourites;
     this._currentTrackIndex = null;
     this._basement = 0;
 
@@ -11,19 +18,35 @@ class TrackList {
     //this._isPlaying = false;
 
     this._trackList.removeClass("close");
-    var test = $("#trackList .play img");
-    test.click(this._onClickPlayButton.bind(this));
+    //var test = $("#trackList .play img");
+    //test.click(this._onClickPlayButton.bind(this));
   }
 
   showTracks(tracks) {
       this._tracks = [];
+      this._favourites = [];
       tracks.forEach((item, i) => {
         this._tracks.push(item.trackId);
+        this._favourites.push(item.favourite);
         item.id = i;
+
+        item.infoForGenres = JSON.stringify({
+          id: item.trackId,
+          trackName: item.track,
+          albumId: item.album.albumId
+        });
       });
 
       $("#trackList .trackListPage").html(this._tmpl.render({tracks: tracks}));
+
       $("#trackList .play img").click(this._onClickPlayButton.bind(this));
+      $("#trackList .like img").click(this._onClickLikeButton.bind(this));
+
+      $("#trackList .menu img").click(function(e) {
+        $("#trackList .menu .submenu").not($(e.target).parents(".menu").children(".submenu")).addClass("close");
+        $(e.target).parents(".menu").children(".submenu").toggleClass("close");
+        e.stopPropagation();
+      });
   }
 
   close() {
@@ -77,5 +100,31 @@ class TrackList {
     if (this._currentTrackIndex >= this._tracks.length) {
       this._currentTrackIndex = Math.abs(this._tracks.length - this._currentTrackIndex);
     }
+  }
+
+  _changeLikeIcon(like, imgElement) {
+    var img = like? "img/like.svg" : "img/nolike.svg";
+    imgElement.attr("src", img);
+  }
+
+  _onClickLikeButton(e) {
+    var id = parseInt($(e.target).attr("id").split("trackListLike")[1]);
+    if (typeof id != "number") return;
+
+    var successFunction = function(response) {
+      this._changeLikeIcon(response.favourite, $(e.target));
+      this._favourites[id] = response.favourite;
+    };
+    successFunction = successFunction.bind(this);
+
+    doRequest({
+      url: "/favourite",
+      type: "PUT",
+      data: {
+        id: this._tracks[id],
+        favourite: !this._favourites[id]
+      },
+      success: successFunction
+    });
   }
 }

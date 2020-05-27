@@ -16,6 +16,14 @@
   margin-left: 30px;
 }
 
+#search a:hover {
+  text-decoration: underline;
+}
+
+#search a {
+  text-decoration: none;
+}
+
 #search .queryHeader .query {
   font-style: italic;
 }
@@ -29,19 +37,21 @@
   vertical-align: top;
 }
 
-#search img {
+#search .cover {
   background-color: #000000;
   width: 75px;
   height: 75px;
   margin: 15px;
 }
 
-#search .item {
-  margin-top: 20px;
+#search .image {
+  background-color: #000000;
+  max-width: 100px;
+  margin: 15px;
 }
 
-#search .albumSearchPage .item .block > div {
-
+#search .item {
+  margin-top: 20px;
 }
 
 #search .albumSearchPage .item .block .type {
@@ -57,5 +67,31 @@
 
 #search .albumSearchPage .item .block .musician a {
   font-size: 20px;
+  color: #757588;
+}
+
+
+#search .musicianSearchPage .item .block .musician a {
+  font-size: 26px;
+  color: #757588;
+}
+
+#search .trackSearchPage .item .block .trackName {
+  font-size: 26px;
+  color: #757588;
+}
+
+#search .trackSearchPage .item .block .albumName a {
+  font-size: 20px;
+  color: #757588;
+}
+
+#search .trackSearchPage .item .block .musicianName a {
+  font-size: 20px;
+  color: #757588;
+}
+
+#search .genreSearchPage .item .block .genre a {
+  font-size: 26px;
   color: #757588;
 }

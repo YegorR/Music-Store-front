@@ -41,6 +41,15 @@
   font-family: Roboto, sans-serif;
 }
 
+.player .musician a {
+  font-size: 14px;
+  color: #757588;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: Roboto, sans-serif;
+  text-decoration: none;
+}
+
 .player .musician a:hover {
   text-decoration: underline;
 }
@@ -54,6 +63,15 @@
    overflow: hidden;
    white-space: nowrap;
    font-family: Roboto, sans-serif;
+ }
+
+ .player .song a {
+   font-size: 16px;
+   color: #1f1f20;
+   overflow: hidden;
+   white-space: nowrap;
+   font-family: Roboto, sans-serif;
+   text-decoration: none;
  }
 
 .player .song a:hover {

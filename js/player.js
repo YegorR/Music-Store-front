@@ -74,7 +74,9 @@ class Player {
     getImage("/album/" + this._albumId + "/image", null, $(".player .cover"));
 
     $(".player .musician a").text(trackInfo.musicianName);
+    $(".player .musician a").attr("href", "#musician/" + trackInfo.musicianId);
     $(".player .song a").text(trackInfo.name);
+    $(".player .song a").attr("href", "#album/" + trackInfo.albumId);
     this._changePlayIcon(false);
 
     var onPlay = this._onTrackPlay.bind(this);

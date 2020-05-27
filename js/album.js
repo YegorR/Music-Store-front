@@ -40,6 +40,7 @@ class Album {
         plays: item.playsNumber,
         musician: info.musician.name,
         album: info.name,
+        favourite: item.favourite
       };
       tracks.push(oneTrack);
     });
